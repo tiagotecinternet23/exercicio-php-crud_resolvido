@@ -1,5 +1,6 @@
 <?php
 require_once 'src/funcoes-alunos.php';
+require_once 'src/funcoes-utilitarias.php';
 $alunos = ler($conexao);
 ?>
 <!DOCTYPE html>
@@ -30,20 +31,14 @@ $alunos = ler($conexao);
         <tbody>
     <?php 
     foreach($alunos as $aluno) { 
-        $media = ($aluno['primeira'] + $aluno['segunda']) / 2;    
-        if($media >= 7){
-            $situacao = "aprovado";
-        } elseif($media >= 5 && $media < 7){
-            $situacao = "recuperacao";
-        } else {
-            $situacao = "reprovado";
-        }
+        $media = calcularMedia($aluno['primeira'], $aluno['segunda']);
+        $situacao = verificarSituacao($media); 
     ?>
             <tr class="<?=$situacao?>">
                 <td><?=$aluno['nome']?></td>
                 <td><?=$aluno['primeira']?></td>
                 <td><?=$aluno['segunda']?></td>
-                <td><?=number_format($media, 2)?></td>
+                <td><?=formatarNotas($media)?></td>
                 <td><?=$situacao?></td>
                 <td>
                     <a href="atualizar.php?id=<?=$aluno['id']?>">Atualizar</a>

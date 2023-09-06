@@ -76,20 +76,3 @@ function excluir(PDO $conexao, int $id):void {
    }
 }
 
-function calculaMedia(float $nota1, float $nota2):float {
-   return ($nota1 + $nota2) / 2;
-}
-
-function verificaSituacao(float $media):string {
-   // return ($media >= 7) ? "aprovado" : "reprovado";
-
-   if($media >= 7){
-      $situacao = "aprovado";
-  } elseif($media >= 5 && $media < 7){
-      $situacao = "recuperacao";
-  } else {
-      $situacao = "reprovado";
-  }
-
-  return $situacao;
-}
